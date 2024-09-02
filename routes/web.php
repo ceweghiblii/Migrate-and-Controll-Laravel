@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\controllerBaru;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,18 +13,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/about', function(){
+    return view('about',[
+        "name" => "lala",
+        "email" =>"lala@gmail.com"
+    ]);
+})->name('about'); 
+// buat nentuin routing websitenya
+Route::get('/content/dashboard', function(){
+    return view('content.dashboard');
 });
+// jngn diarahin ke header footer tp diarahin di kontennya
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/profile', 'ProfileController@index')->name('profile');
-Route::put('/profile', 'ProfileController@update')->name('profile.update');
-
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::get('/content/isiWebsite', function(){
+    return view('content.isiWebsite');
+});
+Route::get('/controller', [controllerBaru::class, 'index']);
